@@ -1,0 +1,14 @@
+[project]
+name = "bigdatatech-final-project"
+version = "0.1.0"
+description = "NYC crime data analysis Python package"
+requires-python = ">=3.9"
+dependencies = [
+    "pandas",
+    "pytest",
+    "pytest-cov"
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
