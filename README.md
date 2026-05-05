@@ -34,7 +34,7 @@ crime dataset was initially refined by standardizing column names, addressing
 missing values, and assuring uniform data types. A descriptive study was
 subsequently performed to investigate crime trends over time and across
 counties utilizing aggregation procedures. Visualization methods, such as line
-and bar charts, were employed to emphasize temporal and regional patterns. A
+and bar charts, and scatter plot were employed to emphasize temporal and regional patterns. A
 machine learning model was developed with scikit-learn to enhance the analysis. 
 A Random Forest Regressor was employed to forecast total crime counts
 (index_total) utilizing temporal (year) and categorical (county, agency) variables. 

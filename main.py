@@ -86,7 +86,7 @@ def main():
 
     # Step 5: Visualization
     plot_crime_by_year(yearly, "year", "index_total")
-    plot_crime_by_county(county, "county", "index_total")
+    plot_crime_by_county(county, "county", "index_total", top_n=20)
     plot_top_risk_areas(risk_table, "predicted_index_total")
     
     import matplotlib.pyplot as plt
