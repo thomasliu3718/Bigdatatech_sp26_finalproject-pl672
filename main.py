@@ -8,6 +8,7 @@ import pandas as pd
 from bigdatatech_final_project.visualization import (
     plot_crime_by_year,
     plot_crime_by_county,
+    plot_top_risk_areas,
 )
 
 from bigdatatech_final_project.data_loader import load_crime_data
@@ -19,6 +20,8 @@ from bigdatatech_final_project.analysis import (
     total_crime_by_year,
     total_crime_by_county,
     average_crime,
+    crime_model_analysis,
+    
 )
 def map_columns(df):
     """
@@ -57,10 +60,19 @@ def main():
     df = remove_missing_rows(df)
 
 
-    # Step 3: Analyze
+    # Step 3A: Common Analyze
     yearly = total_crime_by_year(df, "year", "index_total")
     county = total_crime_by_county(df, "county", "index_total")
     avg = average_crime(df, "index_total")
+
+    # Step 3B: Machine Learning Analysis
+    metrics, risk_table = crime_model_analysis(df, "index_total")
+
+    print("\n=== Crime Model Metrics ===")
+    print(metrics)
+    print("\n=== Top Risk Areas ===")
+    print(risk_table)
+    
 
     # Step 4: Output
     print("\n=== Total Crime by Year ===")
@@ -75,6 +87,7 @@ def main():
     # Step 5: Visualization
     plot_crime_by_year(yearly, "year", "index_total")
     plot_crime_by_county(county, "county", "index_total")
+    plot_top_risk_areas(risk_table, "predicted_index_total")
     
     import matplotlib.pyplot as plt
     plt.show()
