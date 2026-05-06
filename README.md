@@ -18,13 +18,13 @@ Bigdatatech_sp26_finalproject-pl672/
 |
 |
 |---- src/
-|	  |----bigdatatech_final_project/       		
-|		                         	 |--- __init__.py
-|		                         	 |--- data_loader.py
-|      		                         |--- cleaning.py
-|      		                         |--- analysis.py
-|       	                         |--- visualization.py 
-|       	                         |--- crime_model_demo.py # ML model for predicting crime rate
+|	     |---- bigdatatech_final_project/       		
+|		                         	   |--- __init__.py
+|		                         	   |--- data_loader.py
+|      		                           |--- cleaning.py
+|      		                           |--- analysis.py
+|       	                           |--- visualization.py 
+|       	                           |--- crime_model_demo.py # ML model for predicting crime rate
 |	
 |--- database/
 |	         |---Index_Crimes_by_County_and_Agency__Beginning_1990.csv
