@@ -38,6 +38,8 @@ Bigdatatech_sp26_finalproject-pl672/
 |--- pyproject.toml
 |--- LICENSE.txt
 
+```bash
+
 ## Research Methods
 This project implements a comprehensive data analytics workflow to analyze crime patterns throughout New
 York State utilizing Python and machine learning methodologies. The dataset underwent initial cleaning and
@@ -54,11 +56,15 @@ and 2026. Various visualization techniques, such as ranking risk diagrams and pr
 to enhance interpretability and presentation quality.
 
 ## How to run the analysis and model
+```text
+   
    1) From the project root: PYTHONPATH=src python main.py
    2) Optional: run the standalone model script
         python src/bigdatatech_final_project/crime_model_demo.py \
           --data database/Index_Crimes_by_County_and_Agency__Beginning_1990.csv \
           --target index_total
+
+```bash
 
 ## Results
 The study effectively discerned significant temporal and geographic crime patterns within the dataset. Historical
