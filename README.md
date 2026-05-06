@@ -13,6 +13,7 @@ https://data.ny.gov/Public-Safety/Index-Crimes-by-County-and-Agency-Beginning-19
 
 ## Project Structure
 ```text
+
 Bigdatatech_sp26_finalproject-pl672/
 |
 |--- -doc/
@@ -37,6 +38,8 @@ Bigdatatech_sp26_finalproject-pl672/
 |--- pyproject.toml
 |--- LICENSE.txt
 
+```text
+
 ## Research Methods
 This project implements a comprehensive data analytics workflow to analyze crime patterns throughout New
 York State utilizing Python and machine learning methodologies. The dataset underwent initial cleaning and
@@ -59,7 +62,7 @@ to enhance interpretability and presentation quality.
         python src/bigdatatech_final_project/crime_model_demo.py \
           --data database/Index_Crimes_by_County_and_Agency__Beginning_1990.csv \
           --target index_total
-
+```text
 ## Results
 The study effectively discerned significant temporal and geographic crime patterns within the dataset. Historical
 data revealed an overall decrease in total crime throughout New York State from 2002 to 2024, however several
