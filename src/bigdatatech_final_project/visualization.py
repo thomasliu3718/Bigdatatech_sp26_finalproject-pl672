@@ -68,3 +68,58 @@ def plot_top_risk_areas(risk_df, value_column):
     plt.tight_layout()
 
     return plt
+
+
+def plot_future_prediction(
+    history_df,
+    year_column,
+    value_column,
+    future_predictions,
+    title="Future Crime Prediction"
+):
+    """
+    Plot historical crime values plus future predictions.
+    """
+
+    plot_df = history_df[[year_column, value_column]].copy()
+    plot_df = plot_df.sort_values(year_column).tail(8)
+
+    years = plot_df[year_column].astype(str).tolist()
+    values = plot_df[value_column].astype(float).tolist()
+
+    # Add future predictions
+    for year, pred in future_predictions.items():
+        years.append(str(year))
+        values.append(float(pred))
+
+    # Colors: historical blue, predictions orange
+    colors = (
+        ["steelblue"] * (len(values) - len(future_predictions))
+        + ["orange"] * len(future_predictions)
+    )
+
+    plt.figure(figsize=(10, 5))
+
+    plt.bar(years, values, color=colors)
+
+    from matplotlib.patches import Patch
+
+    legend_elements = [
+        Patch(facecolor='steelblue', label='Historical'),
+        Patch(facecolor='orange', label='Predicted')
+    ]
+
+    plt.legend(handles=legend_elements)
+
+    plt.xlabel("Year")
+    plt.ylabel("Crime Count")
+    plt.title(title)
+
+    plt.xticks(rotation=45)
+    plt.grid(axis="y", alpha=0.3)
+
+    plt.tight_layout()
+
+    return plt
+
+

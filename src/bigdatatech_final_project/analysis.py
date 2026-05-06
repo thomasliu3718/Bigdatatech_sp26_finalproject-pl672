@@ -6,7 +6,7 @@ Functions for analyzing crime datasets.
 
 import pandas as pd
 from bigdatatech_final_project.crime_model_demo import get_feature_importance
-
+from bigdatatech_final_project.crime_model_demo import predict_future_crime
 
 def total_crime_by_year(df, year_column, value_column):
     """
@@ -75,4 +75,18 @@ def crime_model_analysis(df, target_col="index_total"):
         top_n=10
     )
 
-    return metrics, risk_table
+    future_df, future_prediction = predict_future_crime(
+    model=model,
+    template_df=X,
+    county="New York",
+    agency="New York City Police Department",
+    year=2026
+    )
+
+    print("\n=== Predicted NYC Crime in 2026 ===")
+    print(future_df)
+    print("Predicted index_total:", future_prediction)
+
+    return metrics, risk_table, model, X
+
+

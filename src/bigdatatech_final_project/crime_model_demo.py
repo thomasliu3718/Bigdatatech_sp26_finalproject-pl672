@@ -265,3 +265,29 @@ def get_feature_importance(model):
         "feature": feature_names,
         "importance": importances
     }).sort_values("importance", ascending=False)
+
+
+def predict_future_crime(model, template_df, county, agency, year=2026):
+    """
+    Predict future crime count for a selected county/agency/year.
+    Uses median/mode values from existing data as defaults.
+    """
+    future_row = {}
+
+    for col in template_df.columns:
+        if col == "county":
+            future_row[col] = county
+        elif col == "agency":
+            future_row[col] = agency
+        elif col == "year":
+            future_row[col] = year
+        elif pd.api.types.is_numeric_dtype(template_df[col]):
+            future_row[col] = template_df[col].median()
+        else:
+            future_row[col] = template_df[col].mode()[0]
+
+    future_df = pd.DataFrame([future_row])
+
+    pred = model.predict(future_df)[0]
+
+    return future_df, float(pred)

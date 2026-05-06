@@ -23,6 +23,10 @@ from bigdatatech_final_project.analysis import (
     crime_model_analysis,
     
 )
+
+from bigdatatech_final_project.crime_model_demo import predict_future_crime
+from bigdatatech_final_project.visualization import plot_future_prediction
+
 def map_columns(df):
     """
     Map real NYC dataset columns to:
@@ -46,6 +50,24 @@ def map_columns(df):
     return df.rename(columns=mapping)
 
 
+import numpy as np
+
+def forecast_by_trend(history_df, year_column, value_column, future_year):
+    """
+    Forecast future crime count using a simple linear trend.
+    """
+    temp = history_df[[year_column, value_column]].dropna().copy()
+    temp = temp.sort_values(year_column)
+
+    x = temp[year_column].astype(float).values
+    y = temp[value_column].astype(float).values
+
+    slope, intercept = np.polyfit(x, y, 1)
+    prediction = slope * future_year + intercept
+
+    return max(0, float(prediction))
+
+
 def main():
     # Step 1: Load data
     file_path = "database/Index_Crimes_by_County_and_Agency__Beginning_1990_20260504.csv"  # change to your actual file
@@ -66,13 +88,61 @@ def main():
     avg = average_crime(df, "index_total")
 
     # Step 3B: Machine Learning Analysis
-    metrics, risk_table = crime_model_analysis(df, "index_total")
+    metrics, risk_table, model, X = crime_model_analysis(df, "index_total")
 
     print("\n=== Crime Model Metrics ===")
     print(metrics)
     print("\n=== Top Risk Areas ===")
     print(risk_table)
-    
+    selected_county = "Orange"
+    selected_agency = "Orange County State Police"
+
+    history_for_prediction = df[
+        (df["county"] == selected_county) &
+        (df["agency"] == selected_agency)
+    ].copy()
+
+    # Get the most recent row for this county/agency
+    latest_idx = history_for_prediction.sort_values("year").index[-1]
+
+    # Predict 2025
+    future_df_2025 = X.loc[[latest_idx]].copy()
+    future_df_2025["year"] = 2025
+
+    if "years_since_start" in future_df_2025.columns:
+        future_df_2025["years_since_start"] = 2025 - df["year"].min()
+
+    future_prediction_2025 = forecast_by_trend(
+    history_for_prediction,
+    "year",
+    "index_total",
+    2025
+    )
+
+    # Predict 2026
+    future_df_2026 = X.loc[[latest_idx]].copy()
+    future_df_2026["year"] = 2026
+
+    if "years_since_start" in future_df_2026.columns:
+        future_df_2026["years_since_start"] = 2026 - df["year"].min()
+
+    future_prediction_2026 = forecast_by_trend(
+    history_for_prediction,
+    "year",
+    "index_total",
+    2026
+    )
+
+    print("\n=== Future Prediction Location ===")
+    print("County:", selected_county)
+    print("Agency:", selected_agency)
+    print("2025 Predicted index_total:", future_prediction_2025)
+    print("2026 Predicted index_total:", future_prediction_2026)
+
+    history_for_prediction = df[
+    (df["county"] == selected_county) &
+    (df["agency"] == selected_agency)
+    ].copy()
 
     # Step 4: Output
     print("\n=== Total Crime by Year ===")
@@ -88,6 +158,18 @@ def main():
     plot_crime_by_year(yearly, "year", "index_total")
     plot_crime_by_county(county, "county", "index_total", top_n=20)
     plot_top_risk_areas(risk_table, "predicted_index_total")
+    
+    ## future prediction plot
+    plot_future_prediction(
+        history_df=history_for_prediction,
+        year_column="year",
+        value_column="index_total",
+        future_predictions={
+            2025: future_prediction_2025,
+            2026: future_prediction_2026
+        },
+        title=f"Predicted Crime Count: {selected_county}"
+    )
     
     import matplotlib.pyplot as plt
     plt.show()
