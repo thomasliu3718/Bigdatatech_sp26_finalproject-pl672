@@ -12,20 +12,30 @@ the raw data (.csv) is from:
 https://data.ny.gov/Public-Safety/Index-Crimes-by-County-and-Agency-Beginning-1990/ca8h-8gjq/about_data.
 
 ## Project Structure
-
-src/
-|------bigdatatech_final_project/
-       |--- data_loader.py
-       |--- cleaning.py
-       |--- analysis.py
-       |--- visualization.py 
-       |--- crime_model_demo.py # ML model for predicting crime rate
-
-database/
-|-------Index_Crimes_by_County_and_Agency__Beginning_1990.csv
-
-main.py
-README.md
+```text
+Bigdatatech_sp26_finalproject-pl672/
+|
+|--- -doc/
+|
+|
+|---- src/
+|	  |----bigdatatech_final_project/       		
+|		                         |--- __init__.py
+|		                         |--- data_loader.py
+|      		                         |--- cleaning.py
+|      		                         |--- analysis.py
+|       	                         |--- visualization.py 
+|       	                         |--- crime_model_demo.py # ML model for predicting crime rate
+|	
+|--- database/
+|	      |---Index_Crimes_by_County_and_Agency__Beginning_1990.csv
+|
+|--- tests/
+|
+|--- main.py
+|--- README.md
+|--- pyproject.toml
+|--- LICENSE.txt
 
 ## Research Methods
 This project implements a comprehensive data analytics workflow to analyze crime patterns throughout New
@@ -43,6 +53,7 @@ and 2026. Various visualization techniques, such as ranking risk diagrams and pr
 to enhance interpretability and presentation quality.
 
 ## How to run the analysis and model
+```text
    1) From the project root: PYTHONPATH=src python main.py
    2) Optional: run the standalone model script
         python src/bigdatatech_final_project/crime_model_demo.py \
