@@ -16,7 +16,7 @@ https://data.ny.gov/Public-Safety/Index-Crimes-by-County-and-Agency-Beginning-19
 
 Bigdatatech_sp26_finalproject-pl672/
 |
-|--- -doc/
+|---- doc/
 |
 |
 |---- src/
@@ -54,7 +54,6 @@ and 2026. Various visualization techniques, such as ranking risk diagrams and pr
 to enhance interpretability and presentation quality.
 
 ## How to run the analysis and model
-```text
    1) From the project root: PYTHONPATH=src python main.py
    2) Optional: run the standalone model script
         python src/bigdatatech_final_project/crime_model_demo.py \
