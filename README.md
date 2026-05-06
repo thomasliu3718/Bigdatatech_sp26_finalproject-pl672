@@ -1,5 +1,3 @@
-# Bigdatatech_sp26_finalproject-pangweiliu
-
 # NYC Crime Data Analysis & Predictive Modeling
 
 ## Project Overview
@@ -55,7 +53,7 @@ forecasting method was employed to project future crime counts for the Orange Co
 and 2026. Various visualization techniques, such as ranking risk diagrams and predictive charts, were created 
 to enhance interpretability and presentation quality.
 
-## How to run the analysis and model
+## How to run the analysis and the predictive model
 ```text
    
    1) From the project root: PYTHONPATH=src python main.py
